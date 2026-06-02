@@ -1,90 +1,181 @@
-**Test case:**
-step 1 : go to website : https://orteil.dashnet.org/cookieclicker/
-step 2: counte the number of taps on cookies
+# 🍪 Cookie Clicker Automation
 
+<div align="center">
 
-Screenshots : 
-![image](https://github.com/RiddhiGondaliya/Cookie-counter-automation/assets/42887563/2206f6ae-9f8d-46cb-81b2-d233c75855fd)
+![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Selenium](https://img.shields.io/badge/Selenium-4.6+-43B02A?style=for-the-badge&logo=selenium&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-Userscript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Tampermonkey](https://img.shields.io/badge/Tampermonkey-Compatible-00485B?style=for-the-badge&logo=tampermonkey&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
+**Automação do jogo Cookie Clicker em duas versões: um script Python com Selenium e um userscript JavaScript para Tampermonkey.**
 
-![image](https://github.com/RiddhiGondaliya/Cookie-counter-automation/assets/42887563/6ca54500-7026-42dc-a351-ea93185d43d8)
+[📋 Sobre](#-sobre-o-projeto) • [📁 Estrutura](#-estrutura-do-projeto) • [🚀 Como Usar](#-como-usar) • [⚠️ Limitações](#-limitações) • [📝 Licença](#-licença)
 
-https://github.com/RiddhiGondaliya/Cookie-counter-automation/assets/42887563/8a5bc312-7e07-47c5-87e0-e597eab7d78b
+</div>
 
 ---
 
-## Repository Update Overview
+## 📋 Índice
 
-In this repository update, the following changes were made:
+- [📋 Sobre o Projeto](#-sobre-o-projeto)
+- [📁 Estrutura do Projeto](#-estrutura-do-projeto)
+- [🚀 Funcionalidades](#-funcionalidades)
+- [🎯 Como Usar](#-como-usar)
+- [🔧 Funcionalidades Técnicas](#-funcionalidades-técnicas)
+- [⚠️ Limitações](#-limitações)
+- [🛡️ Segurança](#-segurança)
+- [📝 Licença](#-licença)
+- [👤 Autor](#-autor)
+- [🤝 Contribuições](#-contribuições)
 
-I have revised and updated Riddhi Gondaliya’s original code, as her version was not functioning correctly on my system. After acquiring the Chrome driver and implementing some adjustments to the code, I encountered two primary issues:
+---
 
-1. **Manual Data Saving:** The script failed to automatically save progress upon each session start, necessitating manual data saving.
-2. **Suboptimal Click Speed:** The click speed was deemed too slow and inefficient for effective gameplay, prompting the exploration of alternative solutions.
+## 📋 Sobre o Projeto
 
-Instead of creating a standalone Python file to initiate the browser and perform clicks, I opted to delve into the site's code itself and developed a script within it using Tampermonkey. This approach allows for actions on the site that are universally compatible across different browsers.
+Este projeto automatiza o jogo [Cookie Clicker](https://orteil.dashnet.org/cookieclicker/): clica o cookie principal continuamente e compra automaticamente os itens e upgrades mais baratos disponíveis.
 
-## Python Version
+Existem **duas versões independentes**, cada uma com uma abordagem diferente:
 
-**Original Script Overview:**
-1. Utilizes Selenium to automate the Cookie Clicker game.
-2. Performs clicks on the cookie and attempts to purchase the cheapest available product.
-3. Lacks functionality for saving game progress.
-4. Does not support pausing or resuming script execution.
+- **🐍 Versão Python** — controla um navegador externo via **Selenium**. Permite pausar/retomar pelo teclado e restaurar a sessão anterior.
+- **📜 Versão JavaScript** — um **userscript** que roda dentro da própria página do jogo via Tampermonkey. Mais leve e independente de navegador.
 
-**Enhanced Script Features:**
-1. Utilizes Selenium for game automation.
-2. Introduces additional functionalities:
-    - Retrieves the current cookie count.
-    - Facilitates product purchases.
-3. Implements functionality to load cookies from previous sessions for progress continuity.
-4. Supports pausing and resuming script execution via the 'p' and 'r' keys, respectively.
-5. Incorporates the keyboard module for key press detection.
-6. Offers various enhancements over the original script:
-    - Implements saving and loading of game progress.
-    - Enables pausing and resuming of script execution.
-    - Adopts a more organized code structure with distinct functions for different tasks.
-    - Enhances code readability and maintainability.
+> Projeto baseado no repositório original de [RiddhiGondaliya](https://github.com/RiddhiGondaliya/Cookie-counter-automation), revisado e corrigido para funcionar de forma portátil e segura.
 
-## JavaScript Version
+---
 
-**Script Objective:**
-- Automated gameplay for Cookie Clicker.
-- Compatible with userscript managers such as Tampermonkey.
+## 📁 Estrutura do Projeto
 
-**Functionality Overview:**
-1. **clickCookie():**
-   - Action: Clicks the cookie within the game.
-   - Implementation: Utilizes the game's built-in method (`Game.ClickCookie()`).
+```
+Cookie-counter-automation/
+│
+├── cookie_clicker.py          # Versão Python (Selenium)
+├── cookie_clicker.user.js     # Versão JavaScript (userscript Tampermonkey)
+├── requirements.txt           # Dependências Python
+├── IA.md                      # Contexto operacional do projeto
+├── README.md                  # Este arquivo
+└── LICENSE                    # Licença MIT
+```
 
-2. **buyCheapestItem():**
-   - Action: Purchases the cheapest available item.
-   - Implementation:
-     - Retrieves unlocked and enabled items.
-     - Maps elements to an array with their corresponding prices.
-     - Sorts items by price in descending order.
-     - Buys the cheapest item by clicking on it.
-     - Logs the purchase.
+---
 
-3. **buyCheapestUpgrade():**
-   - Action: Acquires the cheapest available upgrade.
-   - Implementation:
-     - Retrieves enabled upgrades.
-     - Maps elements to an array with their corresponding prices.
-     - Triggers the mouseover event to display the price tooltip.
-     - Sorts upgrades by price in ascending order.
-     - Buys the cheapest upgrade by clicking on it.
-     - Logs the purchase.
+## 🚀 Funcionalidades
 
-**Main Loop Execution:**
-- Function: `mainLoop()`
-- Action: Initiates the primary loop of the script.
-- Components:
-  - Clicking the cookie.
-  - Purchasing the cheapest upgrade.
-  - Purchasing the cheapest item.
+### 🐍 Versão Python (`cookie_clicker.py`)
 
-**Execution Frequency:**
-- The main loop is activated using `setInterval(mainLoop, 1)`, executing every 1 millisecond.
+- Clica o cookie principal continuamente.
+- Compra o primeiro produto acessível entre os slots visíveis.
+- ⏸️ **Pausar / retomar** com as teclas `p` e `r`.
+- 💾 Restaura cookies de sessão anterior a partir de `cookies.pkl` (se existir).
+- Resolve o `chromedriver` automaticamente (Selenium Manager) ou via variável de ambiente.
 
---- 
+### 📜 Versão JavaScript (`cookie_clicker.user.js`)
+
+- Clica o cookie usando o método interno do jogo (`Game.ClickCookie()`).
+- Compra o **upgrade** mais barato disponível.
+- Compra o **item** (building) mais barato disponível.
+- Roda dentro da página, sem navegador externo.
+
+---
+
+## 🎯 Como Usar
+
+### Opção 1: Userscript JavaScript (mais simples) 📜
+
+1. Instale a extensão [Tampermonkey](https://www.tampermonkey.net/) no seu navegador.
+2. Crie um novo script e cole o conteúdo de [cookie_clicker.user.js](cookie_clicker.user.js).
+3. Salve e abra o [Cookie Clicker](https://orteil.dashnet.org/cookieclicker/). A automação inicia sozinha.
+
+### Opção 2: Script Python (Selenium) 🐍
+
+#### Instalação
+
+```bash
+# Clone o repositório
+git clone https://github.com/Felipe-Alcantara/Cookie-counter-automation.git
+cd Cookie-counter-automation
+
+# Instale as dependências
+pip install -r requirements.txt
+```
+
+> **Pré-requisito:** Google Chrome (ou Chromium) instalado. Não é necessário baixar o `chromedriver` manualmente — o Selenium Manager (Selenium ≥ 4.6) resolve isso automaticamente.
+
+#### Executando
+
+```bash
+python cookie_clicker.py
+```
+
+Durante a execução: pressione `p` para pausar, `r` para retomar e `Ctrl+C` para encerrar.
+
+#### Configuração opcional (variáveis de ambiente)
+
+| Variável | O que faz |
+|----------|-----------|
+| `CHROME_BINARY` | Caminho para o executável do Chrome/Chromium, se não estiver no padrão. |
+| `CHROMEDRIVER` | Caminho para um `chromedriver` específico. Se omitido, o Selenium Manager o resolve. |
+
+```bash
+# Exemplo (Linux): usar um Chromium em local não padrão
+CHROME_BINARY=/usr/bin/chromium python cookie_clicker.py
+```
+
+---
+
+## 🔧 Funcionalidades Técnicas
+
+### Funções principais (Python)
+
+- **`build_driver()`**: Cria o WebDriver respeitando `CHROME_BINARY` / `CHROMEDRIVER`.
+- **`load_saved_cookies(driver)`**: Restaura cookies de `cookies.pkl`, tolerando arquivo ausente ou corrompido.
+- **`get_cookie_count(driver)`**: Lê a contagem atual de cookies; retorna `None` se não conseguir ler.
+- **`buy_cheapest_affordable_product(driver, count)`**: Compra o primeiro produto acessível entre os slots.
+
+### Funções principais (JavaScript)
+
+- **`clickCookie()`**: Clica o cookie via `Game.ClickCookie()`.
+- **`buyCheapestUpgrade()`**: Ordena os upgrades por preço ascendente e compra o mais barato.
+- **`buyCheapestItem()`**: Ordena os produtos por preço ascendente e compra o mais barato.
+
+---
+
+## ⚠️ Limitações
+
+- **Dependente do DOM do jogo:** mudanças no HTML do Cookie Clicker podem quebrar os seletores.
+- **Versão Python — Windows:** o módulo `keyboard` pode exigir privilégios de administrador em alguns sistemas Linux.
+- **Velocidade do loop JS:** fixada em 200ms para não travar o navegador; ajustável em `LOOP_INTERVAL_MS`.
+- **Sem testes automatizados:** validação é manual (abrir o jogo e observar cliques/compras), pois depende de um site externo.
+
+---
+
+## 🛡️ Segurança
+
+⚠️ **IMPORTANTE:** O arquivo `cookies.pkl` (versão Python) guarda cookies de sessão do navegador e **não deve ser versionado** — já está incluído no `.gitignore`.
+
+- Nenhum caminho pessoal, token ou credencial deve ser commitado.
+- Use este projeto apenas para fins recreativos/educacionais no Cookie Clicker.
+
+---
+
+## 📝 Licença
+
+Este projeto está sob a licença MIT — veja o arquivo [LICENSE](LICENSE).
+
+## 👤 Autor
+
+**Felipe Martin**
+- GitHub: [@Felipe-Alcantara](https://github.com/Felipe-Alcantara)
+
+Baseado no trabalho original de [RiddhiGondaliya](https://github.com/RiddhiGondaliya/Cookie-counter-automation).
+
+## 🤝 Contribuições
+
+Contribuições são bem-vindas! Sinta-se à vontade para:
+- Reportar bugs
+- Sugerir novas funcionalidades
+- Melhorar a documentação
+
+---
+
+⭐ Se este projeto foi útil, considere dar uma estrela no GitHub!
