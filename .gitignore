@@ -1,2 +1,9 @@
-
 /felixo-standards
+
+# Saved Cookie Clicker session cookies — may contain browser session data
+cookies.pkl
+
+# Python
+__pycache__/
+*.py[cod]
+

@@ -1,0 +1,4 @@
+# Selenium >= 4.6 ships Selenium Manager, which resolves a matching
+# chromedriver automatically (no manual driver path needed).
+selenium>=4.6
+keyboard>=0.13
